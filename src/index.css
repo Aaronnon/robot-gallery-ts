@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@font-face {
+  font-family: 'Orange';
+  src: local('Orange'), url(./assets/fonts/Orange-juice-2.ttf) format('truetype');
+}
