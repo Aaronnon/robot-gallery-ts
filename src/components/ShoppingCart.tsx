@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './ShoppingCart.module.css'
+import { FiShoppingCart } from 'react-icons/fi'
 
 interface Props {
 
@@ -17,14 +18,19 @@ class ShoppingCart extends React.Component<Props, State> {
     }
   }
 
-  handleClick(e:React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    this.setState({ isOpen: !this.state.isOpen })
+  handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if ((e.target as HTMLElement).nodeName === 'SPAN') {
+      this.setState({ isOpen: !this.state.isOpen })
+    }
   }
 
   render() {
     return (
       <div className={styles.cartContainer}>
-        <button onClick={(e)=>this.handleClick(e)} className={styles.button}>Cart 2 (items)</button>
+        <button onClick={(e) => this.handleClick(e)} className={styles.button}>
+          <FiShoppingCart />
+          <span>Cart 2 (items)</span>
+        </button>
         <div className={styles.cartDropDown}
           style={{
             display: this.state.isOpen ? "block" : "none"
