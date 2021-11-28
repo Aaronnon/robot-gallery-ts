@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './App.module.css'
 import robot from './assets/images/robot.svg'
-import robots from './mockdata/robots.json'
 import Robot from './components/Robot';
 import ShoppingCart from './components/ShoppingCart';
 
@@ -13,38 +12,41 @@ interface State {
   count: number
 }
 
-class App extends React.Component<Props, State> {
-  constructor(props) {
-    super(props)
-    this.state = {
-      robotGallery: [],
-      count: 0
-    }
-  }
+const App: React.FC = () => {
+  const [count, setCount] = useState<number>(0)
+  const [robotGallery, setrobotGallery] = useState<any>([])
 
-  componentDidMount() {
+  useEffect(() => {
+    document.title = `clicked ${count}`
+  }, [count])
+
+  useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then(res => res.json())
-      .then(data => this.setState({ robotGallery: data }))
-  }
-  render() {
-    return (
-      <div className={styles.app}>
-        <div className={styles.appHeader}>
-          <img src={robot} className={styles.appLogo} alt='logo' />
-          <h1>Rock 'Em Sock 'Em Robots.</h1>
-        </div>
-        <button onClick={() => {
-          this.setState({ count: this.state.count + 1 })
-        }}>Click</button>
-        <ShoppingCart />
-        <div className={styles.robotList}>
-          {this.state.robotGallery.map(item => <Robot id={item.id} email={item.email} name={item.name} key={item.id} />)}
-        </div>
-      </div>
-    );
-  }
+      .then(data => setrobotGallery(data))
+  }, [])
+  // componentDidMount() {
+  //   fetch("https://jsonplaceholder.typicode.com/users")
+  //     .then(res => res.json())
+  //     .then(data => this.setState({ robotGallery: data }))
+  // }
 
+  return (
+    <div className={styles.app}>
+      <div className={styles.appHeader}>
+        <img src={robot} className={styles.appLogo} alt='logo' />
+        <h1>Rock 'Em Sock 'Em Robots.</h1>
+      </div>
+      <button onClick={() => {
+        setCount(count + 1)
+      }}>Click</button>
+      <span>count: {count}</span>
+      <ShoppingCart />
+      <div className={styles.robotList}>
+        {robotGallery.map(item => <Robot id={item.id} email={item.email} name={item.name} key={item.id} />)}
+      </div>
+    </div>
+  );
 }
 
 export default App;
