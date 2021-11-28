@@ -6,12 +6,12 @@ import RobotDiscount from './components/RobotDiscount';
 import ShoppingCart from './components/ShoppingCart';
 
 
-interface Props { }
+// interface Props { }
 
-interface State {
-  robotGallery: any[]
-  count: number
-}
+// interface State {
+//   robotGallery: any[]
+//   count: number
+// }
 
 const App: React.FC = () => {
   const [count, setCount] = useState<number>(0)
