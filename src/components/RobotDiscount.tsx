@@ -5,19 +5,19 @@ import { withAddToCart } from './AddToCart'
 
 
 
-export interface RobotProps {
+interface RobotProps {
     id: number,
     name: string,
-    email: string,
+    email: string
     addToCart: (id, name) => void
 }
-const Robot: React.FC<RobotProps> = ({ id, name, email, addToCart }) => {
+const RobotDiscount: React.FC<RobotProps> = ({ id, name, email, addToCart }) => {
     const value = useContext(appContext)
-
     return (
 
         <div className={styles.cardContainer}>
             <img src={`https://robohash.org/${id}`} alt="robot" />
+            <h2>On Sale</h2>
             <h2>{name}</h2>
             <p>{email}</p>
             <p>Author:{value.userName}</p>
@@ -27,4 +27,4 @@ const Robot: React.FC<RobotProps> = ({ id, name, email, addToCart }) => {
 
     )
 }
-export default withAddToCart(Robot)
+export default withAddToCart(RobotDiscount)

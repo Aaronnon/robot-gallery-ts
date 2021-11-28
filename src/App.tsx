@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './App.module.css'
 import robot from './assets/images/robot.svg'
 import Robot from './components/Robot';
+import RobotDiscount from './components/RobotDiscount';
 import ShoppingCart from './components/ShoppingCart';
 
 
@@ -61,7 +62,12 @@ const App: React.FC = () => {
       {(!error || error !== "") && <div>webError:{error}</div>}
       {!loading ?
         <div className={styles.robotList}>
-          {robotGallery.map(item => <Robot id={item.id} email={item.email} name={item.name} key={item.id} />)}
+          {robotGallery.map((item, index) =>
+            index % 2 === 0 ?
+              (<RobotDiscount id={item.id} email={item.email} name={item.name} key={item.id} />)
+          :
+          (<Robot id={item.id} email={item.email} name={item.name} key={item.id} />)
+          )}
         </div>
         : <h2>Loading data ...</h2>
       }
